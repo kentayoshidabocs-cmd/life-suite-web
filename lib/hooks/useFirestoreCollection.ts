@@ -9,6 +9,7 @@ import {
   DocumentData,
   onSnapshot,
   updateDoc,
+  UpdateData,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase/client";
 
@@ -30,7 +31,8 @@ export function useFirestoreCollection<T extends DocumentData>(collectionName: s
   );
 
   const update = useCallback(
-    (id: string, item: Partial<T>) => updateDoc(doc(db, collectionName, id), item),
+    (id: string, item: Partial<T>) =>
+      updateDoc(doc(db, collectionName, id), item as UpdateData<DocumentData>),
     [collectionName]
   );
 
